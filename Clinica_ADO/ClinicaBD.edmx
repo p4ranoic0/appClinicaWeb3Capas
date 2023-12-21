@@ -1,0 +1,984 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ClinicaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Tb_Atencion">
+          <Key>
+            <PropertyRef Name="cod_ate" />
+          </Key>
+          <Property Name="cod_ate" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="cod_med" Type="nchar" MaxLength="4" />
+          <Property Name="comen_ate" Type="nvarchar" MaxLength="200" />
+          <Property Name="est_ate" Type="nchar" MaxLength="1" />
+          <Property Name="num_sala" Type="nchar" MaxLength="4" />
+          <Property Name="Fec_reg" Type="datetime" Nullable="false" />
+          <Property Name="Usu_Registro" Type="varchar" MaxLength="20" />
+          <Property Name="Fec_Ult_Mod" Type="datetime" />
+          <Property Name="Usu_Ult_Mod" Type="varchar" MaxLength="20" />
+          <Property Name="cod_suc" Type="nchar" MaxLength="4" />
+          <Property Name="cod_pac" Type="nchar" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="Tb_Detalle_Receta">
+          <Key>
+            <PropertyRef Name="cod_rec" />
+            <PropertyRef Name="cod_medi" />
+          </Key>
+          <Property Name="cod_rec" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="cod_medi" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="cant_medi" Type="nchar" MaxLength="2" />
+          <Property Name="indicaciones" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Tb_Especialidad">
+          <Key>
+            <PropertyRef Name="cod_espec" />
+          </Key>
+          <Property Name="cod_espec" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="nom_espec" Type="nvarchar" MaxLength="99" />
+        </EntityType>
+        <EntityType Name="Tb_Laboratorio">
+          <Key>
+            <PropertyRef Name="cod_lab" />
+          </Key>
+          <Property Name="cod_lab" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="nom_lab" Type="nvarchar" MaxLength="50" />
+          <Property Name="dir_lab" Type="nvarchar" MaxLength="99" />
+          <Property Name="cod_ubigeo" Type="nchar" MaxLength="6" />
+          <Property Name="telf1" Type="nchar" MaxLength="9" />
+          <Property Name="telf2" Type="nchar" MaxLength="7" />
+          <Property Name="Fec_reg" Type="datetime" Nullable="false" />
+          <Property Name="Usu_Registro" Type="varchar" MaxLength="20" />
+          <Property Name="Fec_Ult_Mod" Type="datetime" />
+          <Property Name="Usu_Ult_Mod" Type="varchar" MaxLength="20" />
+          <Property Name="Est_lab" Type="int" />
+        </EntityType>
+        <EntityType Name="Tb_Medicamento">
+          <Key>
+            <PropertyRef Name="cod_medi" />
+          </Key>
+          <Property Name="cod_medi" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="nom_medi" Type="nvarchar" MaxLength="99" />
+          <Property Name="comp_medi" Type="nvarchar" MaxLength="200" />
+          <Property Name="cod_lab" Type="nchar" MaxLength="3" />
+          <Property Name="mlgr_medi" Type="nchar" MaxLength="2" />
+          <Property Name="Fec_reg" Type="datetime" Nullable="false" />
+          <Property Name="Usu_Registro" Type="varchar" MaxLength="20" />
+          <Property Name="Fec_Ult_Mod" Type="datetime" />
+          <Property Name="Usu_Ult_Mod" Type="varchar" MaxLength="20" />
+          <Property Name="Est_medi" Type="int" />
+        </EntityType>
+        <EntityType Name="Tb_Medico">
+          <Key>
+            <PropertyRef Name="cod_med" />
+          </Key>
+          <Property Name="cod_med" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="cod_espec" Type="nchar" MaxLength="4" />
+          <Property Name="nom_med" Type="nvarchar" MaxLength="99" />
+          <Property Name="ape_med" Type="nvarchar" MaxLength="99" />
+          <Property Name="dir_med" Type="nvarchar" MaxLength="99" />
+          <Property Name="comen_est_pac" Type="nvarchar" MaxLength="200" />
+          <Property Name="email" Type="nvarchar" MaxLength="99" />
+          <Property Name="telf" Type="nchar" MaxLength="9" />
+          <Property Name="genero" Type="nchar" MaxLength="1" />
+          <Property Name="fech_nac_med" Type="datetime" />
+          <Property Name="num_colegiatura" Type="nchar" MaxLength="10" />
+          <Property Name="Fec_reg" Type="datetime" Nullable="false" />
+          <Property Name="Usu_Registro" Type="varchar" MaxLength="20" />
+          <Property Name="Fec_Ult_Mod" Type="datetime" />
+          <Property Name="Usu_Ult_Mod" Type="varchar" MaxLength="20" />
+          <Property Name="Est_med" Type="int" />
+          <Property Name="cod_ubigeo" Type="nchar" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="Tb_Paciente">
+          <Key>
+            <PropertyRef Name="cod_pac" />
+          </Key>
+          <Property Name="cod_pac" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="nom_pac" Type="nvarchar" MaxLength="99" />
+          <Property Name="ape_pac" Type="nvarchar" MaxLength="99" />
+          <Property Name="genero" Type="nchar" MaxLength="1" />
+          <Property Name="foto" Type="image" />
+          <Property Name="telf" Type="nchar" MaxLength="9" />
+          <Property Name="comen_pac" Type="nvarchar" MaxLength="200" />
+          <Property Name="dir_pac" Type="nvarchar" MaxLength="99" />
+          <Property Name="email" Type="nvarchar" MaxLength="99" />
+          <Property Name="fech_nac_pac" Type="datetime" />
+          <Property Name="sangre" Type="nvarchar" MaxLength="5" />
+          <Property Name="cod_seg" Type="nchar" MaxLength="4" />
+          <Property Name="Usu_Registro" Type="varchar" MaxLength="20" />
+          <Property Name="Fec_Ult_Mod" Type="datetime" />
+          <Property Name="Usu_Ult_Mod" Type="varchar" MaxLength="20" />
+          <Property Name="est_pac" Type="nchar" MaxLength="1" />
+          <Property Name="cod_ubigeo" Type="nchar" MaxLength="6" />
+          <Property Name="dni" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tb_Receta">
+          <Key>
+            <PropertyRef Name="cod_rec" />
+          </Key>
+          <Property Name="cod_rec" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="Fec_reg" Type="datetime" Nullable="false" />
+          <Property Name="cod_ate" Type="nchar" MaxLength="4" />
+          <Property Name="Usu_Registro" Type="varchar" MaxLength="20" />
+          <Property Name="Fec_Ult_Mod" Type="datetime" />
+          <Property Name="Usu_Ult_Mod" Type="varchar" MaxLength="20" />
+          <Property Name="Est_rec" Type="nchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Tb_Seguro">
+          <Key>
+            <PropertyRef Name="cod_seg" />
+          </Key>
+          <Property Name="cod_seg" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="nom_sug" Type="nvarchar" MaxLength="99" />
+          <Property Name="telf_sug" Type="nchar" MaxLength="99" />
+          <Property Name="tip_sug" Type="nchar" MaxLength="1" />
+          <Property Name="desc_sug" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="dir_sug" Type="nvarchar" MaxLength="99" />
+          <Property Name="cod_ubigeo" Type="nchar" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="Tb_Sucursal">
+          <Key>
+            <PropertyRef Name="cod_suc" />
+          </Key>
+          <Property Name="cod_suc" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="nom_suc" Type="nvarchar" MaxLength="99" />
+          <Property Name="dir_suc" Type="nvarchar" MaxLength="99" />
+          <Property Name="telf_suc" Type="nchar" MaxLength="9" />
+          <Property Name="cod_ubigeo" Type="nchar" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="Tb_Ubigeo">
+          <Key>
+            <PropertyRef Name="cod_ubigeo" />
+          </Key>
+          <Property Name="cod_ubigeo" Type="nchar" MaxLength="6" Nullable="false" />
+          <Property Name="IdDepa" Type="nchar" MaxLength="2" />
+          <Property Name="IdProv" Type="nchar" MaxLength="2" />
+          <Property Name="IdDist" Type="nchar" MaxLength="2" />
+          <Property Name="Departamento" Type="nvarchar" MaxLength="90" />
+          <Property Name="Provincia" Type="nvarchar" MaxLength="90" />
+          <Property Name="Distrito" Type="nvarchar" MaxLength="90" />
+        </EntityType>
+        <Association Name="FK__Tb_Atenci__cod_m__3C69FB99">
+          <End Role="Tb_Medico" Type="Self.Tb_Medico" Multiplicity="0..1" />
+          <End Role="Tb_Atencion" Type="Self.Tb_Atencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Medico">
+              <PropertyRef Name="cod_med" />
+            </Principal>
+            <Dependent Role="Tb_Atencion">
+              <PropertyRef Name="cod_med" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Atenci__cod_p__3E52440B">
+          <End Role="Tb_Paciente" Type="Self.Tb_Paciente" Multiplicity="0..1" />
+          <End Role="Tb_Atencion" Type="Self.Tb_Atencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Paciente">
+              <PropertyRef Name="cod_pac" />
+            </Principal>
+            <Dependent Role="Tb_Atencion">
+              <PropertyRef Name="cod_pac" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Atenci__cod_s__3D5E1FD2">
+          <End Role="Tb_Sucursal" Type="Self.Tb_Sucursal" Multiplicity="0..1" />
+          <End Role="Tb_Atencion" Type="Self.Tb_Atencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Sucursal">
+              <PropertyRef Name="cod_suc" />
+            </Principal>
+            <Dependent Role="Tb_Atencion">
+              <PropertyRef Name="cod_suc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Detall__cod_m__4222D4EF">
+          <End Role="Tb_Medicamento" Type="Self.Tb_Medicamento" Multiplicity="1" />
+          <End Role="Tb_Detalle_Receta" Type="Self.Tb_Detalle_Receta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Medicamento">
+              <PropertyRef Name="cod_medi" />
+            </Principal>
+            <Dependent Role="Tb_Detalle_Receta">
+              <PropertyRef Name="cod_medi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Detall__cod_r__412EB0B6">
+          <End Role="Tb_Receta" Type="Self.Tb_Receta" Multiplicity="1" />
+          <End Role="Tb_Detalle_Receta" Type="Self.Tb_Detalle_Receta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Receta">
+              <PropertyRef Name="cod_rec" />
+            </Principal>
+            <Dependent Role="Tb_Detalle_Receta">
+              <PropertyRef Name="cod_rec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Medica__cod_l__4316F928">
+          <End Role="Tb_Laboratorio" Type="Self.Tb_Laboratorio" Multiplicity="0..1" />
+          <End Role="Tb_Medicamento" Type="Self.Tb_Medicamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Laboratorio">
+              <PropertyRef Name="cod_lab" />
+            </Principal>
+            <Dependent Role="Tb_Medicamento">
+              <PropertyRef Name="cod_lab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Medico__cod_e__3A81B327">
+          <End Role="Tb_Especialidad" Type="Self.Tb_Especialidad" Multiplicity="0..1" />
+          <End Role="Tb_Medico" Type="Self.Tb_Medico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Especialidad">
+              <PropertyRef Name="cod_espec" />
+            </Principal>
+            <Dependent Role="Tb_Medico">
+              <PropertyRef Name="cod_espec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Medico__cod_u__3B75D760">
+          <End Role="Tb_Ubigeo" Type="Self.Tb_Ubigeo" Multiplicity="0..1" />
+          <End Role="Tb_Medico" Type="Self.Tb_Medico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Ubigeo">
+              <PropertyRef Name="cod_ubigeo" />
+            </Principal>
+            <Dependent Role="Tb_Medico">
+              <PropertyRef Name="cod_ubigeo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Pacien__cod_s__398D8EEE">
+          <End Role="Tb_Seguro" Type="Self.Tb_Seguro" Multiplicity="0..1" />
+          <End Role="Tb_Paciente" Type="Self.Tb_Paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Seguro">
+              <PropertyRef Name="cod_seg" />
+            </Principal>
+            <Dependent Role="Tb_Paciente">
+              <PropertyRef Name="cod_seg" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Pacien__cod_u__38996AB5">
+          <End Role="Tb_Ubigeo" Type="Self.Tb_Ubigeo" Multiplicity="0..1" />
+          <End Role="Tb_Paciente" Type="Self.Tb_Paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Ubigeo">
+              <PropertyRef Name="cod_ubigeo" />
+            </Principal>
+            <Dependent Role="Tb_Paciente">
+              <PropertyRef Name="cod_ubigeo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Pacien__cod_u__440B1D61">
+          <End Role="Tb_Ubigeo" Type="Self.Tb_Ubigeo" Multiplicity="0..1" />
+          <End Role="Tb_Paciente" Type="Self.Tb_Paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Ubigeo">
+              <PropertyRef Name="cod_ubigeo" />
+            </Principal>
+            <Dependent Role="Tb_Paciente">
+              <PropertyRef Name="cod_ubigeo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Receta__cod_a__3F466844">
+          <End Role="Tb_Atencion" Type="Self.Tb_Atencion" Multiplicity="0..1" />
+          <End Role="Tb_Receta" Type="Self.Tb_Receta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Atencion">
+              <PropertyRef Name="cod_ate" />
+            </Principal>
+            <Dependent Role="Tb_Receta">
+              <PropertyRef Name="cod_ate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Sucurs__cod_u__403A8C7D">
+          <End Role="Tb_Ubigeo" Type="Self.Tb_Ubigeo" Multiplicity="0..1" />
+          <End Role="Tb_Sucursal" Type="Self.Tb_Sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Ubigeo">
+              <PropertyRef Name="cod_ubigeo" />
+            </Principal>
+            <Dependent Role="Tb_Sucursal">
+              <PropertyRef Name="cod_ubigeo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClinicaDBModelStoreContainer">
+          <EntitySet Name="Tb_Atencion" EntityType="Self.Tb_Atencion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tb_Detalle_Receta" EntityType="Self.Tb_Detalle_Receta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tb_Especialidad" EntityType="Self.Tb_Especialidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tb_Laboratorio" EntityType="Self.Tb_Laboratorio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tb_Medicamento" EntityType="Self.Tb_Medicamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tb_Medico" EntityType="Self.Tb_Medico" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tb_Paciente" EntityType="Self.Tb_Paciente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tb_Receta" EntityType="Self.Tb_Receta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tb_Seguro" EntityType="Self.Tb_Seguro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tb_Sucursal" EntityType="Self.Tb_Sucursal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tb_Ubigeo" EntityType="Self.Tb_Ubigeo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Tb_Atenci__cod_m__3C69FB99" Association="Self.FK__Tb_Atenci__cod_m__3C69FB99">
+            <End Role="Tb_Medico" EntitySet="Tb_Medico" />
+            <End Role="Tb_Atencion" EntitySet="Tb_Atencion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Atenci__cod_p__3E52440B" Association="Self.FK__Tb_Atenci__cod_p__3E52440B">
+            <End Role="Tb_Paciente" EntitySet="Tb_Paciente" />
+            <End Role="Tb_Atencion" EntitySet="Tb_Atencion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Atenci__cod_s__3D5E1FD2" Association="Self.FK__Tb_Atenci__cod_s__3D5E1FD2">
+            <End Role="Tb_Sucursal" EntitySet="Tb_Sucursal" />
+            <End Role="Tb_Atencion" EntitySet="Tb_Atencion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Detall__cod_m__4222D4EF" Association="Self.FK__Tb_Detall__cod_m__4222D4EF">
+            <End Role="Tb_Medicamento" EntitySet="Tb_Medicamento" />
+            <End Role="Tb_Detalle_Receta" EntitySet="Tb_Detalle_Receta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Detall__cod_r__412EB0B6" Association="Self.FK__Tb_Detall__cod_r__412EB0B6">
+            <End Role="Tb_Receta" EntitySet="Tb_Receta" />
+            <End Role="Tb_Detalle_Receta" EntitySet="Tb_Detalle_Receta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Medica__cod_l__4316F928" Association="Self.FK__Tb_Medica__cod_l__4316F928">
+            <End Role="Tb_Laboratorio" EntitySet="Tb_Laboratorio" />
+            <End Role="Tb_Medicamento" EntitySet="Tb_Medicamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Medico__cod_e__3A81B327" Association="Self.FK__Tb_Medico__cod_e__3A81B327">
+            <End Role="Tb_Especialidad" EntitySet="Tb_Especialidad" />
+            <End Role="Tb_Medico" EntitySet="Tb_Medico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Medico__cod_u__3B75D760" Association="Self.FK__Tb_Medico__cod_u__3B75D760">
+            <End Role="Tb_Ubigeo" EntitySet="Tb_Ubigeo" />
+            <End Role="Tb_Medico" EntitySet="Tb_Medico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Pacien__cod_s__398D8EEE" Association="Self.FK__Tb_Pacien__cod_s__398D8EEE">
+            <End Role="Tb_Seguro" EntitySet="Tb_Seguro" />
+            <End Role="Tb_Paciente" EntitySet="Tb_Paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Pacien__cod_u__38996AB5" Association="Self.FK__Tb_Pacien__cod_u__38996AB5">
+            <End Role="Tb_Ubigeo" EntitySet="Tb_Ubigeo" />
+            <End Role="Tb_Paciente" EntitySet="Tb_Paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Pacien__cod_u__440B1D61" Association="Self.FK__Tb_Pacien__cod_u__440B1D61">
+            <End Role="Tb_Ubigeo" EntitySet="Tb_Ubigeo" />
+            <End Role="Tb_Paciente" EntitySet="Tb_Paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Receta__cod_a__3F466844" Association="Self.FK__Tb_Receta__cod_a__3F466844">
+            <End Role="Tb_Atencion" EntitySet="Tb_Atencion" />
+            <End Role="Tb_Receta" EntitySet="Tb_Receta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Sucurs__cod_u__403A8C7D" Association="Self.FK__Tb_Sucurs__cod_u__403A8C7D">
+            <End Role="Tb_Ubigeo" EntitySet="Tb_Ubigeo" />
+            <End Role="Tb_Sucursal" EntitySet="Tb_Sucursal" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClinicaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Tb_Atencion">
+          <Key>
+            <PropertyRef Name="cod_ate" />
+          </Key>
+          <Property Name="cod_ate" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="cod_med" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="comen_ate" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="est_ate" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="num_sala" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="Fec_reg" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Usu_Registro" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_Ult_Mod" Type="DateTime" Precision="3" />
+          <Property Name="Usu_Ult_Mod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cod_suc" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="cod_pac" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Tb_Medico" Relationship="Self.FK__Tb_Atenci__cod_m__3C69FB99" FromRole="Tb_Atencion" ToRole="Tb_Medico" />
+          <NavigationProperty Name="Tb_Sucursal" Relationship="Self.FK__Tb_Atenci__cod_s__3D5E1FD2" FromRole="Tb_Atencion" ToRole="Tb_Sucursal" />
+          <NavigationProperty Name="Tb_Receta" Relationship="Self.FK__Tb_Receta__cod_a__3F466844" FromRole="Tb_Atencion" ToRole="Tb_Receta" />
+          <NavigationProperty Name="Tb_Paciente" Relationship="ClinicaDBModel.FK__Tb_Atenci__cod_p__3E52440B" FromRole="Tb_Atencion" ToRole="Tb_Paciente" />
+        </EntityType>
+        <EntityType Name="Tb_Detalle_Receta">
+          <Key>
+            <PropertyRef Name="cod_rec" />
+            <PropertyRef Name="cod_medi" />
+          </Key>
+          <Property Name="cod_rec" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="cod_medi" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="cant_medi" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="indicaciones" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tb_Medicamento" Relationship="Self.FK__Tb_Detall__cod_m__4222D4EF" FromRole="Tb_Detalle_Receta" ToRole="Tb_Medicamento" />
+          <NavigationProperty Name="Tb_Receta" Relationship="Self.FK__Tb_Detall__cod_r__412EB0B6" FromRole="Tb_Detalle_Receta" ToRole="Tb_Receta" />
+        </EntityType>
+        <EntityType Name="Tb_Especialidad">
+          <Key>
+            <PropertyRef Name="cod_espec" />
+          </Key>
+          <Property Name="cod_espec" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nom_espec" Type="String" MaxLength="99" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tb_Medico" Relationship="Self.FK__Tb_Medico__cod_e__3A81B327" FromRole="Tb_Especialidad" ToRole="Tb_Medico" />
+        </EntityType>
+        <EntityType Name="Tb_Laboratorio">
+          <Key>
+            <PropertyRef Name="cod_lab" />
+          </Key>
+          <Property Name="cod_lab" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nom_lab" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dir_lab" Type="String" MaxLength="99" FixedLength="false" Unicode="true" />
+          <Property Name="cod_ubigeo" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="telf1" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
+          <Property Name="telf2" Type="String" MaxLength="7" FixedLength="true" Unicode="true" />
+          <Property Name="Fec_reg" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Usu_Registro" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_Ult_Mod" Type="DateTime" Precision="3" />
+          <Property Name="Usu_Ult_Mod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Est_lab" Type="Int32" />
+          <NavigationProperty Name="Tb_Medicamento" Relationship="Self.FK__Tb_Medica__cod_l__4316F928" FromRole="Tb_Laboratorio" ToRole="Tb_Medicamento" />
+        </EntityType>
+        <EntityType Name="Tb_Medicamento">
+          <Key>
+            <PropertyRef Name="cod_medi" />
+          </Key>
+          <Property Name="cod_medi" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nom_medi" Type="String" MaxLength="99" FixedLength="false" Unicode="true" />
+          <Property Name="comp_medi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="cod_lab" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="mlgr_medi" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="Fec_reg" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Usu_Registro" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_Ult_Mod" Type="DateTime" Precision="3" />
+          <Property Name="Usu_Ult_Mod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Est_medi" Type="Int32" />
+          <NavigationProperty Name="Tb_Detalle_Receta" Relationship="Self.FK__Tb_Detall__cod_m__4222D4EF" FromRole="Tb_Medicamento" ToRole="Tb_Detalle_Receta" />
+          <NavigationProperty Name="Tb_Laboratorio" Relationship="Self.FK__Tb_Medica__cod_l__4316F928" FromRole="Tb_Medicamento" ToRole="Tb_Laboratorio" />
+        </EntityType>
+        <EntityType Name="Tb_Medico">
+          <Key>
+            <PropertyRef Name="cod_med" />
+          </Key>
+          <Property Name="cod_med" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="cod_espec" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="nom_med" Type="String" MaxLength="99" FixedLength="false" Unicode="true" />
+          <Property Name="ape_med" Type="String" MaxLength="99" FixedLength="false" Unicode="true" />
+          <Property Name="dir_med" Type="String" MaxLength="99" FixedLength="false" Unicode="true" />
+          <Property Name="comen_est_pac" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="99" FixedLength="false" Unicode="true" />
+          <Property Name="telf" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
+          <Property Name="genero" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="fech_nac_med" Type="DateTime" Precision="3" />
+          <Property Name="num_colegiatura" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Fec_reg" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Usu_Registro" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_Ult_Mod" Type="DateTime" Precision="3" />
+          <Property Name="Usu_Ult_Mod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Est_med" Type="Int32" />
+          <Property Name="cod_ubigeo" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Tb_Atencion" Relationship="Self.FK__Tb_Atenci__cod_m__3C69FB99" FromRole="Tb_Medico" ToRole="Tb_Atencion" />
+          <NavigationProperty Name="Tb_Especialidad" Relationship="Self.FK__Tb_Medico__cod_e__3A81B327" FromRole="Tb_Medico" ToRole="Tb_Especialidad" />
+          <NavigationProperty Name="Tb_Ubigeo" Relationship="Self.FK__Tb_Medico__cod_u__3B75D760" FromRole="Tb_Medico" ToRole="Tb_Ubigeo" />
+        </EntityType>
+        <EntityType Name="Tb_Receta">
+          <Key>
+            <PropertyRef Name="cod_rec" />
+          </Key>
+          <Property Name="cod_rec" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Fec_reg" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cod_ate" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="Usu_Registro" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_Ult_Mod" Type="DateTime" Precision="3" />
+          <Property Name="Usu_Ult_Mod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Est_rec" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Tb_Atencion" Relationship="Self.FK__Tb_Receta__cod_a__3F466844" FromRole="Tb_Receta" ToRole="Tb_Atencion" />
+          <NavigationProperty Name="Tb_Detalle_Receta" Relationship="Self.FK__Tb_Detall__cod_r__412EB0B6" FromRole="Tb_Receta" ToRole="Tb_Detalle_Receta" />
+        </EntityType>
+        <EntityType Name="Tb_Seguro">
+          <Key>
+            <PropertyRef Name="cod_seg" />
+          </Key>
+          <Property Name="cod_seg" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nom_sug" Type="String" MaxLength="99" FixedLength="false" Unicode="true" />
+          <Property Name="telf_sug" Type="String" MaxLength="99" FixedLength="true" Unicode="true" />
+          <Property Name="tip_sug" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="desc_sug" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="dir_sug" Type="String" MaxLength="99" FixedLength="false" Unicode="true" />
+          <Property Name="cod_ubigeo" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Tb_Paciente" Relationship="ClinicaDBModel.FK__Tb_Pacien__cod_s__398D8EEE" FromRole="Tb_Seguro" ToRole="Tb_Paciente" />
+        </EntityType>
+        <EntityType Name="Tb_Sucursal">
+          <Key>
+            <PropertyRef Name="cod_suc" />
+          </Key>
+          <Property Name="cod_suc" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nom_suc" Type="String" MaxLength="99" FixedLength="false" Unicode="true" />
+          <Property Name="dir_suc" Type="String" MaxLength="99" FixedLength="false" Unicode="true" />
+          <Property Name="telf_suc" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
+          <Property Name="cod_ubigeo" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Tb_Atencion" Relationship="Self.FK__Tb_Atenci__cod_s__3D5E1FD2" FromRole="Tb_Sucursal" ToRole="Tb_Atencion" />
+          <NavigationProperty Name="Tb_Ubigeo" Relationship="Self.FK__Tb_Sucurs__cod_u__403A8C7D" FromRole="Tb_Sucursal" ToRole="Tb_Ubigeo" />
+        </EntityType>
+        <EntityType Name="Tb_Ubigeo">
+          <Key>
+            <PropertyRef Name="cod_ubigeo" />
+          </Key>
+          <Property Name="cod_ubigeo" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="IdDepa" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="IdProv" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="IdDist" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="Departamento" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="Provincia" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="Distrito" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tb_Medico" Relationship="Self.FK__Tb_Medico__cod_u__3B75D760" FromRole="Tb_Ubigeo" ToRole="Tb_Medico" />
+          <NavigationProperty Name="Tb_Sucursal" Relationship="Self.FK__Tb_Sucurs__cod_u__403A8C7D" FromRole="Tb_Ubigeo" ToRole="Tb_Sucursal" />
+          <NavigationProperty Name="Tb_Paciente" Relationship="ClinicaDBModel.FK__Tb_Pacien__cod_u__38996AB5" FromRole="Tb_Ubigeo" ToRole="Tb_Paciente" />
+          <NavigationProperty Name="Tb_Paciente1" Relationship="ClinicaDBModel.FK__Tb_Pacien__cod_u__440B1D61" FromRole="Tb_Ubigeo" ToRole="Tb_Paciente" />
+          </EntityType>
+        <Association Name="FK__Tb_Atenci__cod_m__3C69FB99">
+          <End Role="Tb_Medico" Type="Self.Tb_Medico" Multiplicity="0..1" />
+          <End Role="Tb_Atencion" Type="Self.Tb_Atencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Medico">
+              <PropertyRef Name="cod_med" />
+            </Principal>
+            <Dependent Role="Tb_Atencion">
+              <PropertyRef Name="cod_med" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Atenci__cod_s__3D5E1FD2">
+          <End Role="Tb_Sucursal" Type="Self.Tb_Sucursal" Multiplicity="0..1" />
+          <End Role="Tb_Atencion" Type="Self.Tb_Atencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Sucursal">
+              <PropertyRef Name="cod_suc" />
+            </Principal>
+            <Dependent Role="Tb_Atencion">
+              <PropertyRef Name="cod_suc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Receta__cod_a__3F466844">
+          <End Role="Tb_Atencion" Type="Self.Tb_Atencion" Multiplicity="0..1" />
+          <End Role="Tb_Receta" Type="Self.Tb_Receta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Atencion">
+              <PropertyRef Name="cod_ate" />
+            </Principal>
+            <Dependent Role="Tb_Receta">
+              <PropertyRef Name="cod_ate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Detall__cod_m__4222D4EF">
+          <End Role="Tb_Medicamento" Type="Self.Tb_Medicamento" Multiplicity="1" />
+          <End Role="Tb_Detalle_Receta" Type="Self.Tb_Detalle_Receta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Medicamento">
+              <PropertyRef Name="cod_medi" />
+            </Principal>
+            <Dependent Role="Tb_Detalle_Receta">
+              <PropertyRef Name="cod_medi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Detall__cod_r__412EB0B6">
+          <End Role="Tb_Receta" Type="Self.Tb_Receta" Multiplicity="1" />
+          <End Role="Tb_Detalle_Receta" Type="Self.Tb_Detalle_Receta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Receta">
+              <PropertyRef Name="cod_rec" />
+            </Principal>
+            <Dependent Role="Tb_Detalle_Receta">
+              <PropertyRef Name="cod_rec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Medico__cod_e__3A81B327">
+          <End Role="Tb_Especialidad" Type="Self.Tb_Especialidad" Multiplicity="0..1" />
+          <End Role="Tb_Medico" Type="Self.Tb_Medico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Especialidad">
+              <PropertyRef Name="cod_espec" />
+            </Principal>
+            <Dependent Role="Tb_Medico">
+              <PropertyRef Name="cod_espec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Medica__cod_l__4316F928">
+          <End Role="Tb_Laboratorio" Type="Self.Tb_Laboratorio" Multiplicity="0..1" />
+          <End Role="Tb_Medicamento" Type="Self.Tb_Medicamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Laboratorio">
+              <PropertyRef Name="cod_lab" />
+            </Principal>
+            <Dependent Role="Tb_Medicamento">
+              <PropertyRef Name="cod_lab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Medico__cod_u__3B75D760">
+          <End Role="Tb_Ubigeo" Type="Self.Tb_Ubigeo" Multiplicity="0..1" />
+          <End Role="Tb_Medico" Type="Self.Tb_Medico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Ubigeo">
+              <PropertyRef Name="cod_ubigeo" />
+            </Principal>
+            <Dependent Role="Tb_Medico">
+              <PropertyRef Name="cod_ubigeo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Sucurs__cod_u__403A8C7D">
+          <End Role="Tb_Ubigeo" Type="Self.Tb_Ubigeo" Multiplicity="0..1" />
+          <End Role="Tb_Sucursal" Type="Self.Tb_Sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Ubigeo">
+              <PropertyRef Name="cod_ubigeo" />
+            </Principal>
+            <Dependent Role="Tb_Sucursal">
+              <PropertyRef Name="cod_ubigeo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClinicaDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tb_Atencion" EntityType="Self.Tb_Atencion" />
+          <EntitySet Name="Tb_Detalle_Receta" EntityType="Self.Tb_Detalle_Receta" />
+          <EntitySet Name="Tb_Especialidad" EntityType="Self.Tb_Especialidad" />
+          <EntitySet Name="Tb_Laboratorio" EntityType="Self.Tb_Laboratorio" />
+          <EntitySet Name="Tb_Medicamento" EntityType="Self.Tb_Medicamento" />
+          <EntitySet Name="Tb_Medico" EntityType="Self.Tb_Medico" />
+          <EntitySet Name="Tb_Receta" EntityType="Self.Tb_Receta" />
+          <EntitySet Name="Tb_Seguro" EntityType="Self.Tb_Seguro" />
+          <EntitySet Name="Tb_Sucursal" EntityType="Self.Tb_Sucursal" />
+          <EntitySet Name="Tb_Ubigeo" EntityType="Self.Tb_Ubigeo" />
+          <AssociationSet Name="FK__Tb_Atenci__cod_m__3C69FB99" Association="Self.FK__Tb_Atenci__cod_m__3C69FB99">
+            <End Role="Tb_Medico" EntitySet="Tb_Medico" />
+            <End Role="Tb_Atencion" EntitySet="Tb_Atencion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Atenci__cod_s__3D5E1FD2" Association="Self.FK__Tb_Atenci__cod_s__3D5E1FD2">
+            <End Role="Tb_Sucursal" EntitySet="Tb_Sucursal" />
+            <End Role="Tb_Atencion" EntitySet="Tb_Atencion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Receta__cod_a__3F466844" Association="Self.FK__Tb_Receta__cod_a__3F466844">
+            <End Role="Tb_Atencion" EntitySet="Tb_Atencion" />
+            <End Role="Tb_Receta" EntitySet="Tb_Receta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Detall__cod_m__4222D4EF" Association="Self.FK__Tb_Detall__cod_m__4222D4EF">
+            <End Role="Tb_Medicamento" EntitySet="Tb_Medicamento" />
+            <End Role="Tb_Detalle_Receta" EntitySet="Tb_Detalle_Receta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Detall__cod_r__412EB0B6" Association="Self.FK__Tb_Detall__cod_r__412EB0B6">
+            <End Role="Tb_Receta" EntitySet="Tb_Receta" />
+            <End Role="Tb_Detalle_Receta" EntitySet="Tb_Detalle_Receta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Medico__cod_e__3A81B327" Association="Self.FK__Tb_Medico__cod_e__3A81B327">
+            <End Role="Tb_Especialidad" EntitySet="Tb_Especialidad" />
+            <End Role="Tb_Medico" EntitySet="Tb_Medico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Medica__cod_l__4316F928" Association="Self.FK__Tb_Medica__cod_l__4316F928">
+            <End Role="Tb_Laboratorio" EntitySet="Tb_Laboratorio" />
+            <End Role="Tb_Medicamento" EntitySet="Tb_Medicamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Medico__cod_u__3B75D760" Association="Self.FK__Tb_Medico__cod_u__3B75D760">
+            <End Role="Tb_Ubigeo" EntitySet="Tb_Ubigeo" />
+            <End Role="Tb_Medico" EntitySet="Tb_Medico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Sucurs__cod_u__403A8C7D" Association="Self.FK__Tb_Sucurs__cod_u__403A8C7D">
+            <End Role="Tb_Ubigeo" EntitySet="Tb_Ubigeo" />
+            <End Role="Tb_Sucursal" EntitySet="Tb_Sucursal" />
+          </AssociationSet>
+          <EntitySet Name="Tb_Paciente" EntityType="ClinicaDBModel.Tb_Paciente" />
+          <AssociationSet Name="FK__Tb_Atenci__cod_p__3E52440B" Association="ClinicaDBModel.FK__Tb_Atenci__cod_p__3E52440B">
+            <End Role="Tb_Paciente" EntitySet="Tb_Paciente" />
+            <End Role="Tb_Atencion" EntitySet="Tb_Atencion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Pacien__cod_s__398D8EEE" Association="ClinicaDBModel.FK__Tb_Pacien__cod_s__398D8EEE">
+            <End Role="Tb_Seguro" EntitySet="Tb_Seguro" />
+            <End Role="Tb_Paciente" EntitySet="Tb_Paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Pacien__cod_u__38996AB5" Association="ClinicaDBModel.FK__Tb_Pacien__cod_u__38996AB5">
+            <End Role="Tb_Ubigeo" EntitySet="Tb_Ubigeo" />
+            <End Role="Tb_Paciente" EntitySet="Tb_Paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tb_Pacien__cod_u__440B1D61" Association="ClinicaDBModel.FK__Tb_Pacien__cod_u__440B1D61">
+            <End Role="Tb_Ubigeo" EntitySet="Tb_Ubigeo" />
+            <End Role="Tb_Paciente" EntitySet="Tb_Paciente" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Tb_Paciente">
+          <Key>
+            <PropertyRef Name="cod_pac" />
+          </Key>
+          <Property Name="cod_pac" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="nom_pac" Type="String" MaxLength="99" FixedLength="false" Unicode="true" />
+          <Property Name="ape_pac" Type="String" MaxLength="99" FixedLength="false" Unicode="true" />
+          <Property Name="genero" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="telf" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
+          <Property Name="comen_pac" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="dir_pac" Type="String" MaxLength="99" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="99" FixedLength="false" Unicode="true" />
+          <Property Name="fech_nac_pac" Type="DateTime" Precision="3" />
+          <Property Name="sangre" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="cod_seg" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="Usu_Registro" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_Ult_Mod" Type="DateTime" Precision="3" />
+          <Property Name="Usu_Ult_Mod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="est_pac" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="cod_ubigeo" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="dni" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tb_Atencion" Relationship="ClinicaDBModel.FK__Tb_Atenci__cod_p__3E52440B" FromRole="Tb_Paciente" ToRole="Tb_Atencion" />
+          <NavigationProperty Name="Tb_Seguro" Relationship="ClinicaDBModel.FK__Tb_Pacien__cod_s__398D8EEE" FromRole="Tb_Paciente" ToRole="Tb_Seguro" />
+          <NavigationProperty Name="Tb_Ubigeo" Relationship="ClinicaDBModel.FK__Tb_Pacien__cod_u__38996AB5" FromRole="Tb_Paciente" ToRole="Tb_Ubigeo" />
+          <NavigationProperty Name="Tb_Ubigeo1" Relationship="ClinicaDBModel.FK__Tb_Pacien__cod_u__440B1D61" FromRole="Tb_Paciente" ToRole="Tb_Ubigeo" />
+        </EntityType>
+        <Association Name="FK__Tb_Atenci__cod_p__3E52440B">
+          <End Type="ClinicaDBModel.Tb_Paciente" Role="Tb_Paciente" Multiplicity="0..1" />
+          <End Type="ClinicaDBModel.Tb_Atencion" Role="Tb_Atencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Paciente">
+              <PropertyRef Name="cod_pac" />
+            </Principal>
+            <Dependent Role="Tb_Atencion">
+              <PropertyRef Name="cod_pac" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Pacien__cod_s__398D8EEE">
+          <End Type="ClinicaDBModel.Tb_Seguro" Role="Tb_Seguro" Multiplicity="0..1" />
+          <End Type="ClinicaDBModel.Tb_Paciente" Role="Tb_Paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Seguro">
+              <PropertyRef Name="cod_seg" />
+            </Principal>
+            <Dependent Role="Tb_Paciente">
+              <PropertyRef Name="cod_seg" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Pacien__cod_u__38996AB5">
+          <End Type="ClinicaDBModel.Tb_Ubigeo" Role="Tb_Ubigeo" Multiplicity="0..1" />
+          <End Type="ClinicaDBModel.Tb_Paciente" Role="Tb_Paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Ubigeo">
+              <PropertyRef Name="cod_ubigeo" />
+            </Principal>
+            <Dependent Role="Tb_Paciente">
+              <PropertyRef Name="cod_ubigeo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tb_Pacien__cod_u__440B1D61">
+          <End Type="ClinicaDBModel.Tb_Ubigeo" Role="Tb_Ubigeo" Multiplicity="0..1" />
+          <End Type="ClinicaDBModel.Tb_Paciente" Role="Tb_Paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Ubigeo">
+              <PropertyRef Name="cod_ubigeo" />
+            </Principal>
+            <Dependent Role="Tb_Paciente">
+              <PropertyRef Name="cod_ubigeo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ClinicaDBModelStoreContainer" CdmEntityContainer="ClinicaDBEntities">
+          <EntitySetMapping Name="Tb_Atencion">
+            <EntityTypeMapping TypeName="ClinicaDBModel.Tb_Atencion">
+              <MappingFragment StoreEntitySet="Tb_Atencion">
+                <ScalarProperty Name="cod_ate" ColumnName="cod_ate" />
+                <ScalarProperty Name="cod_med" ColumnName="cod_med" />
+                <ScalarProperty Name="comen_ate" ColumnName="comen_ate" />
+                <ScalarProperty Name="est_ate" ColumnName="est_ate" />
+                <ScalarProperty Name="num_sala" ColumnName="num_sala" />
+                <ScalarProperty Name="Fec_reg" ColumnName="Fec_reg" />
+                <ScalarProperty Name="Usu_Registro" ColumnName="Usu_Registro" />
+                <ScalarProperty Name="Fec_Ult_Mod" ColumnName="Fec_Ult_Mod" />
+                <ScalarProperty Name="Usu_Ult_Mod" ColumnName="Usu_Ult_Mod" />
+                <ScalarProperty Name="cod_suc" ColumnName="cod_suc" />
+                <ScalarProperty Name="cod_pac" ColumnName="cod_pac" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tb_Detalle_Receta">
+            <EntityTypeMapping TypeName="ClinicaDBModel.Tb_Detalle_Receta">
+              <MappingFragment StoreEntitySet="Tb_Detalle_Receta">
+                <ScalarProperty Name="cod_rec" ColumnName="cod_rec" />
+                <ScalarProperty Name="cod_medi" ColumnName="cod_medi" />
+                <ScalarProperty Name="cant_medi" ColumnName="cant_medi" />
+                <ScalarProperty Name="indicaciones" ColumnName="indicaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tb_Especialidad">
+            <EntityTypeMapping TypeName="ClinicaDBModel.Tb_Especialidad">
+              <MappingFragment StoreEntitySet="Tb_Especialidad">
+                <ScalarProperty Name="cod_espec" ColumnName="cod_espec" />
+                <ScalarProperty Name="nom_espec" ColumnName="nom_espec" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tb_Laboratorio">
+            <EntityTypeMapping TypeName="ClinicaDBModel.Tb_Laboratorio">
+              <MappingFragment StoreEntitySet="Tb_Laboratorio">
+                <ScalarProperty Name="cod_lab" ColumnName="cod_lab" />
+                <ScalarProperty Name="nom_lab" ColumnName="nom_lab" />
+                <ScalarProperty Name="dir_lab" ColumnName="dir_lab" />
+                <ScalarProperty Name="cod_ubigeo" ColumnName="cod_ubigeo" />
+                <ScalarProperty Name="telf1" ColumnName="telf1" />
+                <ScalarProperty Name="telf2" ColumnName="telf2" />
+                <ScalarProperty Name="Fec_reg" ColumnName="Fec_reg" />
+                <ScalarProperty Name="Usu_Registro" ColumnName="Usu_Registro" />
+                <ScalarProperty Name="Fec_Ult_Mod" ColumnName="Fec_Ult_Mod" />
+                <ScalarProperty Name="Usu_Ult_Mod" ColumnName="Usu_Ult_Mod" />
+                <ScalarProperty Name="Est_lab" ColumnName="Est_lab" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tb_Medicamento">
+            <EntityTypeMapping TypeName="ClinicaDBModel.Tb_Medicamento">
+              <MappingFragment StoreEntitySet="Tb_Medicamento">
+                <ScalarProperty Name="cod_medi" ColumnName="cod_medi" />
+                <ScalarProperty Name="nom_medi" ColumnName="nom_medi" />
+                <ScalarProperty Name="comp_medi" ColumnName="comp_medi" />
+                <ScalarProperty Name="cod_lab" ColumnName="cod_lab" />
+                <ScalarProperty Name="mlgr_medi" ColumnName="mlgr_medi" />
+                <ScalarProperty Name="Fec_reg" ColumnName="Fec_reg" />
+                <ScalarProperty Name="Usu_Registro" ColumnName="Usu_Registro" />
+                <ScalarProperty Name="Fec_Ult_Mod" ColumnName="Fec_Ult_Mod" />
+                <ScalarProperty Name="Usu_Ult_Mod" ColumnName="Usu_Ult_Mod" />
+                <ScalarProperty Name="Est_medi" ColumnName="Est_medi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tb_Medico">
+            <EntityTypeMapping TypeName="ClinicaDBModel.Tb_Medico">
+              <MappingFragment StoreEntitySet="Tb_Medico">
+                <ScalarProperty Name="cod_med" ColumnName="cod_med" />
+                <ScalarProperty Name="cod_espec" ColumnName="cod_espec" />
+                <ScalarProperty Name="nom_med" ColumnName="nom_med" />
+                <ScalarProperty Name="ape_med" ColumnName="ape_med" />
+                <ScalarProperty Name="dir_med" ColumnName="dir_med" />
+                <ScalarProperty Name="comen_est_pac" ColumnName="comen_est_pac" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="telf" ColumnName="telf" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="fech_nac_med" ColumnName="fech_nac_med" />
+                <ScalarProperty Name="num_colegiatura" ColumnName="num_colegiatura" />
+                <ScalarProperty Name="Fec_reg" ColumnName="Fec_reg" />
+                <ScalarProperty Name="Usu_Registro" ColumnName="Usu_Registro" />
+                <ScalarProperty Name="Fec_Ult_Mod" ColumnName="Fec_Ult_Mod" />
+                <ScalarProperty Name="Usu_Ult_Mod" ColumnName="Usu_Ult_Mod" />
+                <ScalarProperty Name="Est_med" ColumnName="Est_med" />
+                <ScalarProperty Name="cod_ubigeo" ColumnName="cod_ubigeo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tb_Receta">
+            <EntityTypeMapping TypeName="ClinicaDBModel.Tb_Receta">
+              <MappingFragment StoreEntitySet="Tb_Receta">
+                <ScalarProperty Name="cod_rec" ColumnName="cod_rec" />
+                <ScalarProperty Name="Fec_reg" ColumnName="Fec_reg" />
+                <ScalarProperty Name="cod_ate" ColumnName="cod_ate" />
+                <ScalarProperty Name="Usu_Registro" ColumnName="Usu_Registro" />
+                <ScalarProperty Name="Fec_Ult_Mod" ColumnName="Fec_Ult_Mod" />
+                <ScalarProperty Name="Usu_Ult_Mod" ColumnName="Usu_Ult_Mod" />
+                <ScalarProperty Name="Est_rec" ColumnName="Est_rec" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tb_Seguro">
+            <EntityTypeMapping TypeName="ClinicaDBModel.Tb_Seguro">
+              <MappingFragment StoreEntitySet="Tb_Seguro">
+                <ScalarProperty Name="cod_seg" ColumnName="cod_seg" />
+                <ScalarProperty Name="nom_sug" ColumnName="nom_sug" />
+                <ScalarProperty Name="telf_sug" ColumnName="telf_sug" />
+                <ScalarProperty Name="tip_sug" ColumnName="tip_sug" />
+                <ScalarProperty Name="desc_sug" ColumnName="desc_sug" />
+                <ScalarProperty Name="dir_sug" ColumnName="dir_sug" />
+                <ScalarProperty Name="cod_ubigeo" ColumnName="cod_ubigeo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tb_Sucursal">
+            <EntityTypeMapping TypeName="ClinicaDBModel.Tb_Sucursal">
+              <MappingFragment StoreEntitySet="Tb_Sucursal">
+                <ScalarProperty Name="cod_suc" ColumnName="cod_suc" />
+                <ScalarProperty Name="nom_suc" ColumnName="nom_suc" />
+                <ScalarProperty Name="dir_suc" ColumnName="dir_suc" />
+                <ScalarProperty Name="telf_suc" ColumnName="telf_suc" />
+                <ScalarProperty Name="cod_ubigeo" ColumnName="cod_ubigeo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tb_Ubigeo">
+            <EntityTypeMapping TypeName="ClinicaDBModel.Tb_Ubigeo">
+              <MappingFragment StoreEntitySet="Tb_Ubigeo">
+                <ScalarProperty Name="cod_ubigeo" ColumnName="cod_ubigeo" />
+                <ScalarProperty Name="IdDepa" ColumnName="IdDepa" />
+                <ScalarProperty Name="IdProv" ColumnName="IdProv" />
+                <ScalarProperty Name="IdDist" ColumnName="IdDist" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+                <ScalarProperty Name="Distrito" ColumnName="Distrito" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tb_Paciente">
+            <EntityTypeMapping TypeName="ClinicaDBModel.Tb_Paciente">
+              <MappingFragment StoreEntitySet="Tb_Paciente">
+                <ScalarProperty Name="dni" ColumnName="dni" />
+                <ScalarProperty Name="cod_ubigeo" ColumnName="cod_ubigeo" />
+                <ScalarProperty Name="est_pac" ColumnName="est_pac" />
+                <ScalarProperty Name="Usu_Ult_Mod" ColumnName="Usu_Ult_Mod" />
+                <ScalarProperty Name="Fec_Ult_Mod" ColumnName="Fec_Ult_Mod" />
+                <ScalarProperty Name="Usu_Registro" ColumnName="Usu_Registro" />
+                <ScalarProperty Name="cod_seg" ColumnName="cod_seg" />
+                <ScalarProperty Name="sangre" ColumnName="sangre" />
+                <ScalarProperty Name="fech_nac_pac" ColumnName="fech_nac_pac" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="dir_pac" ColumnName="dir_pac" />
+                <ScalarProperty Name="comen_pac" ColumnName="comen_pac" />
+                <ScalarProperty Name="telf" ColumnName="telf" />
+                <ScalarProperty Name="foto" ColumnName="foto" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="ape_pac" ColumnName="ape_pac" />
+                <ScalarProperty Name="nom_pac" ColumnName="nom_pac" />
+                <ScalarProperty Name="cod_pac" ColumnName="cod_pac" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

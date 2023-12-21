@@ -1,0 +1,94 @@
+﻿/* Importar fuentes desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+/* Aplicar fuentes al body */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('/Images/otro.jpg');
+    background-size: cover;
+    background-position: center;
+    background-position-y: 20%; /* Ajusta la posición vertical (ejemplo: 20%) */
+    background-repeat: no-repeat;
+    height: 100vh;
+    /* Ajusta la transparencia, 0.2 indica 20% de opacidad */
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Aplicar fuentes a algunos títulos */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Estilos generales para los toasts */
+.toast {
+    background-color: #343A40;
+    opacity: 0.87;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+    margin-bottom: 1.5rem;
+}
+
+/* Estilos para el encabezado del toast */
+.toast-header {
+    font-family: 'Roboto', sans-serif;
+    padding: 0.5rem 1rem;
+    background-color: #222222;
+}
+
+/* Estilos para el título del toast */
+.toast-title {
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+/* Estilos para el mensaje del toast */
+.toast-message {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Estilos para el botón de cerrar el toast */
+.btn-close {
+    color: #ffffff;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    transition: color 0.3s; /* Agregado para suavizar la transición */
+}
+
+    /* Cambio de color al pasar el mouse sobre el botón de cerrar */
+    .btn-close:hover {
+        color: #cccccc;
+    }
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+    .pagination a {
+        color: #007bff;
+        padding: 8px 16px;
+        text-decoration: none;
+        font-size: 14px;
+        transition: background-color 0.3s;
+        border-radius: 4px;
+    }
+
+        .pagination a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+    .pagination .active {
+        background-color: #007bff;
+        color: white;
+    }

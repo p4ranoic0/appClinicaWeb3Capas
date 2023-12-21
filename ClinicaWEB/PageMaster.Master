@@ -1,0 +1,156 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PageMaster.Master.cs" Inherits="ClinicaWEB.PageMaster" %>
+
+<!DOCTYPE html>
+<html>
+
+<script language="javascript" type="text/javascript">
+    javascript: window.history.forward(1);        
+</script>
+<script language="javascript" type="text/javascript">
+
+    var sessionTimeoutWarning = "<%=System.Configuration.ConfigurationManager.AppSettings["AdvertenciaSession"].ToString() %>";
+    var sessionTimeout = "<%=Session.Timeout%>";
+    var timeOnPageLoad = new Date();
+
+
+    //Para la advertencia....
+    setTimeout('SessionWarning()', parseInt(sessionTimeoutWarning) * 60 * 10000); //1minuto
+    //Para redirecionar a otra pagina
+    setTimeout('RedirectToWelcomePage()', parseInt(sessionTimeout) * 60 * 10000);//1minuto
+
+    //Funcion de advertencia...
+    function SessionWarning() {
+        //Tiempo antes de expirar
+        var minutesForExpiry = (parseInt(sessionTimeout) - parseInt(sessionTimeoutWarning));
+        var message = "Tu sesion va a expirar en..." + minutesForExpiry + " minutos.Por favor graba o realiza alguna accion.";
+        alert(message);
+        var currentTime = new Date();
+        //Tiempo de expiracion
+        var timeForExpiry = timeOnPageLoad.setMinutes(timeOnPageLoad.getMinutes() + parseInt(sessionTimeout));
+        //Si en case la hora atual ha sueprado el tiempo de expiracion
+        if (Date.parse(currentTime) > timeForExpiry) {
+            alert("La sesion ha expirado. Seras redireccionado a la pagina de bienvenida");
+            window.location = "../Login.aspx";
+        }
+    }
+    //Funcion para la redireccion a la pagina WebLogin
+    function RedirectToWelcomePage() {
+        alert("La sesion ha expirado. Seras redireccionado a la pagina de bienvenida");
+        window.location = "../Login.aspx";
+    }
+
+</script>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sistema Clinica</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Bootstrap JS (Optional, depending on your needs) -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <!-- Font Awesome CSS -->
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="bg-light">
+    <form id="form1" runat="server">
+
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="True"></asp:ScriptManager>
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <asp:HyperLink class="navbar-brand" runat="server" NavigateUrl="~/Home.aspx">Sistema Clínica</asp:HyperLink>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <asp:HyperLink runat="server" NavigateUrl="~/Home.aspx" Text="Inicio" CssClass="nav-link" />
+                        </li>
+
+                        <li class="nav-item">
+                            <asp:HyperLink runat="server" NavigateUrl="~/Reportes/Reporte1.aspx" Text="Atenciones" CssClass="nav-link" />
+                        </li>
+
+                        <li class="nav-item">
+    <asp:HyperLink runat="server" NavigateUrl="~/Reportes/Reporte2.aspx" Text="Paciente-DNI" CssClass="nav-link" />
+</li>
+                     
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Reportes</a>
+                            <ul class="dropdown-menu">
+                               
+                                <li>
+                                    <asp:HyperLink runat="server" NavigateUrl="~/Reportes/Graficos1.aspx" Text="Atenciones x Sala" CssClass="dropdown-item" />
+                                </li>
+                                <li>
+                                    <asp:HyperLink runat="server" NavigateUrl="~/Reportes/Graficos2.aspx" Text="Atenciones x Medico" CssClass="dropdown-item" />
+                                </li>
+                                <li>
+    <asp:HyperLink runat="server" NavigateUrl="~/Reportes/Graficos3.aspx" Text="Atenciones x Sede" CssClass="dropdown-item" />
+</li>
+
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+
+
+
+
+        <!-- Script para mostrar el toast -->
+
+        <script>
+            function mostrarToast(titulo, tipo, mensaje) {
+                // Crear un elemento de toast
+                var toast = document.createElement('div');
+                toast.className = 'toast position-fixed bottom-0 end-0 bg-' + tipo + ' text-white';
+                toast.setAttribute('role', 'alert');
+                toast.setAttribute('aria-live', 'assertive');
+                toast.setAttribute('aria-atomic', 'true');
+
+                // Contenido del toast
+                toast.innerHTML = `
+                    <div class="toast-header bg-dark text-white">
+                        <strong class="me-auto">${titulo}</strong>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        <p class="mb-0">${mensaje}</p>
+                    </div>
+                `;
+
+                // Agregar el toast al cuerpo del documento
+                document.body.appendChild(toast);
+
+                // Mostrar el toast
+                var bootstrapToast = new bootstrap.Toast(toast);
+                bootstrapToast.show();
+            }
+        </script>
+
+
+        <div class="container mt-3">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+    </form>
+</body>
+</html>
